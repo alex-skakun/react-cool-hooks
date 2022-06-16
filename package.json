@@ -1,0 +1,34 @@
+{
+  "name": "react-cool-hooks",
+  "version": "0.0.1",
+  "sideEffects": false,
+  "author": {
+    "email": "alex.skakun@me.com",
+    "name": "Aleksey Skakun",
+    "url": "https://github.com/alex-skakun"
+  },
+  "repository": {
+    "url": "https://github.com/alex-skakun/react-rx-tools"
+    },
+  "scripts": {
+    "license": "MIT",
+    "test": "npx jest",
+    "test:coverage": "npx jest --coverage",
+    "build": "npm run build:cjs && npm run build:esm",
+    "prebuild": "rm -rf ./dist",
+    "postbuild": "node ./tools/completePackage.mjs",
+    "build:cjs": "echo 'Building CommonJS version' && tsc -p ./tsconfig.cjs.json --pretty",
+    "build:esm": "echo 'Building ESModule version' && tsc -p ./tsconfig.esm.json --pretty"
+  },
+  "peerDependencies": {
+    "react": "16.x.x - 18.x.x"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@types/react": "^18.0.13",
+    "jest-environment-jsdom": "^28.1.1",
+    "ts-jest": "^28.0.5",
+    "typescript": "^4.7.3"
+  }
+}
