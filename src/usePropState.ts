@@ -20,6 +20,11 @@ interface MutablePropState<S> {
   stateValue: S;
 }
 
+/**
+ * May be as alternative for `useState()` when you need update your state by passing updated value.
+ * For a case when you need to create some heavy calculations for state initialization,
+ * you may pass stateFactory as second argument.
+ */
 export function usePropState<T>(prop: T): [T, SetStateFunction<T>];
 export function usePropState<S, T>(prop: T, stateFactory: StateFactory<T, S>): [S, SetStateFunction<S>];
 export function usePropState<S, T>(prop: T, stateFactory?: StateFactory<T, S>): [S, SetStateFunction<S>] {

@@ -16,6 +16,9 @@
     "usePropState"
   ],
   "license": "MIT",
+  "config": {
+    "localRegistry": "http://localhost:4873"
+  },
   "scripts": {
     "test": "npx jest",
     "test:coverage": "npx jest --coverage",
@@ -26,8 +29,8 @@
     "build:esm": "echo 'Building ESModule version' && tsc -p ./tsconfig.esm.json --pretty",
     "prerelease": "npm run build",
     "release": "npm publish ./dist --tag latest --access public",
-    "prerelease:dev": "npm run build && (npm unpublish --registry http://localhost:4873 --force || true)",
-    "release:dev": "npm publish ./dist --registry http://localhost:4873"
+    "prerelease:dev": "npm run build && (npm unpublish --registry $npm_package_config_localRegistry --force || true)",
+    "release:dev": "npm publish ./dist --registry $npm_package_config_localRegistry"
   },
   "peerDependencies": {
     "react": "16.x.x - 18.x.x"
