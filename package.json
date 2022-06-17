@@ -10,9 +10,13 @@
   "repository": {
     "url": "https://github.com/alex-skakun/react-rx-tools"
   },
-  "keywords": ["useOnce", "useFunction", "usePropState"],
+  "keywords": [
+    "useOnce",
+    "useFunction",
+    "usePropState"
+  ],
+  "license": "MIT",
   "scripts": {
-    "license": "MIT",
     "test": "npx jest",
     "test:coverage": "npx jest --coverage",
     "build": "npm run build:cjs && npm run build:esm",
