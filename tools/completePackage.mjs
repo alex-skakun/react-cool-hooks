@@ -75,19 +75,23 @@ Promise.all([
       .then(entries => Object.fromEntries(entries))
       .then(localDependencies => {
         delete packageJson.localDevDependencies;
-        delete packageJson.scripts;
-        delete packageJson.config;
 
         packageJson.dependencies = {
           ...(packageJson.dependencies ?? {}),
           ...localDependencies,
         };
 
-        return {
-          ...packageJson,
-          ...packageExtension,
-        };
+        return packageJson;
       });
+  })
+  .then(packageJson => {
+    delete packageJson.scripts;
+    delete packageJson.config;
+
+    return {
+      ...packageJson,
+      ...packageExtension,
+    };
   })
   .then(updatedPackage => JSON.stringify(updatedPackage, null, 2))
   .then(jsonFile => {
