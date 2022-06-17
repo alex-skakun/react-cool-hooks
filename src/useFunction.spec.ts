@@ -1,9 +1,9 @@
-import { renderHook } from "@testing-library/react";
-import { useFunction } from "./useFunction";
+import { renderHook } from '@testing-library/react';
+import { useFunction } from './useFunction';
 
 
-describe("Custom hook: useFunction()", () => {
-  it("should return the same function for each rerender", () => {
+describe('useFunction()', () => {
+  it('should return the same function for each rerender', () => {
     const { result, rerender } = renderHook(() => useFunction(() => 0));
 
     const firstResult = result.current;
@@ -13,7 +13,7 @@ describe("Custom hook: useFunction()", () => {
     expect(firstResult).toBe(secondResult);
   });
 
-  it("should always use actual props", () => {
+  it('should always use actual props', () => {
     const { result, rerender } = renderHook(({ run }) => {
       const testFn = useFunction(() => {
         return run;

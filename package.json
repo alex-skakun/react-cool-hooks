@@ -9,7 +9,8 @@
   },
   "repository": {
     "url": "https://github.com/alex-skakun/react-rx-tools"
-    },
+  },
+  "keywords": ["useOnce", "useFunction", "usePropState"],
   "scripts": {
     "license": "MIT",
     "test": "npx jest",
@@ -18,7 +19,11 @@
     "prebuild": "rm -rf ./dist",
     "postbuild": "node ./tools/completePackage.mjs",
     "build:cjs": "echo 'Building CommonJS version' && tsc -p ./tsconfig.cjs.json --pretty",
-    "build:esm": "echo 'Building ESModule version' && tsc -p ./tsconfig.esm.json --pretty"
+    "build:esm": "echo 'Building ESModule version' && tsc -p ./tsconfig.esm.json --pretty",
+    "prerelease": "npm run build",
+    "release": "npm publish ./dist --tag latest --access public",
+    "prerelease:dev": "npm run build && (npm unpublish --registry http://localhost:4873 --force || true)",
+    "release:dev": "npm publish ./dist --registry http://localhost:4873"
   },
   "peerDependencies": {
     "react": "16.x.x - 18.x.x"

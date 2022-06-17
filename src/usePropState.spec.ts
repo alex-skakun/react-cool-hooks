@@ -2,7 +2,7 @@ import { act, renderHook, RenderHookOptions } from '@testing-library/react';
 import { usePropState } from './usePropState';
 
 
-describe('Custom hook: usePropState()', () => {
+describe('usePropState()', () => {
   type TestProps = {
     run: number;
   };
@@ -138,5 +138,31 @@ describe('Custom hook: usePropState()', () => {
     });
 
     expect(result.current.state).toEqual({ prop: 2 });
+  });
+
+  it('should receive correct previous state when passing a callback into setState', () => {
+    const { result } = renderHook(() => {
+      const [, setState] = usePropState(null, () => {
+        return { stateVersion: 1 };
+      });
+
+      return setState;
+    });
+
+    act(() => {
+      result.current(previousState => {
+        expect(previousState.stateVersion).toBe(1);
+
+        return { stateVersion: 2 };
+      });
+    });
+
+    act(() => {
+      result.current(previousState => {
+        expect(previousState.stateVersion).toBe(2);
+
+        return { stateVersion: 3 };
+      });
+    });
   });
 });
