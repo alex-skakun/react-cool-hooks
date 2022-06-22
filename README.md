@@ -42,7 +42,7 @@ export function MyComponent() {
   
   const doSomethingWithCounter = useFunction(data => {
     // here I can use received data from child component
-    // and I don't need specify dependencies to have acces 
+    // and I don't need specify dependencies to have access 
     // to latest value of counter, it's always up-to-date.
   });
   
