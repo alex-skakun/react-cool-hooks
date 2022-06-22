@@ -3,6 +3,7 @@ import { useFunction } from './useFunction';
 
 
 describe('useFunction()', () => {
+
   it('should return the same function for each rerender', () => {
     const { result, rerender } = renderHook(() => useFunction(() => 0));
 
@@ -26,4 +27,5 @@ describe('useFunction()', () => {
     rerender({ run: 2 });
     expect(result.current).toBe(2);
   });
+
 });

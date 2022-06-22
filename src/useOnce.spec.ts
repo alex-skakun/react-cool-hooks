@@ -1,7 +1,9 @@
 import { renderHook } from '@testing-library/react';
 import { useOnce } from './useOnce';
 
+
 describe('useOnce()', () => {
+
   it('should return stable result for each render', () => {
     const { result, rerender } = renderHook(() => {
       return useOnce(() => Symbol('test'));
@@ -13,4 +15,5 @@ describe('useOnce()', () => {
 
     expect(firstResult).toBe(secondsResult);
   });
+
 });
