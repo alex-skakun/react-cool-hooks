@@ -1,6 +1,6 @@
 {
   "name": "react-cool-hooks",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "sideEffects": false,
   "author": {
     "email": "alex.skakun@me.com",
@@ -13,34 +13,34 @@
   "keywords": [
     "useOnce",
     "useFunction",
-    "usePropState"
+    "usePropState",
+    "useMountEffect",
+    "useUnmountEffect"
   ],
   "license": "MIT",
-  "config": {
-    "localRegistry": "http://localhost:4873"
-  },
   "scripts": {
-    "test": "npx jest",
-    "test:coverage": "npx jest --coverage",
-    "build": "npm run build:cjs && npm run build:esm",
-    "prebuild": "rm -rf ./dist",
-    "postbuild": "node ./tools/completePackage.mjs",
-    "build:cjs": "echo 'Building CommonJS version' && tsc -p ./tsconfig.cjs.json --pretty",
-    "build:esm": "echo 'Building ESModule version' && tsc -p ./tsconfig.esm.json --pretty",
+    "test": "bun test",
+    "test:coverage": "bun test --coverage",
+    "build": "bun run ./tools/index.ts build ./dist",
+    "prebuild": "rimraf ./dist",
     "prerelease": "npm run build",
-    "release": "npm publish ./dist --tag latest --access public",
-    "prerelease:dev": "npm run build && (npm unpublish --registry $npm_package_config_localRegistry --force || true)",
-    "release:dev": "npm publish ./dist --registry $npm_package_config_localRegistry"
+    "release": "bun run ./tools/index.ts publish ./dist"
   },
   "peerDependencies": {
-    "react": "16.x.x - 18.x.x"
+    "@types/react": ">=16.0.0",
+    "react": ">=16.0.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@types/react": "^18.0.13",
-    "jest-environment-jsdom": "^28.1.1",
-    "ts-jest": "^28.0.5",
-    "typescript": "^4.7.3"
+    "@happy-dom/global-registrator": "17.4.7",
+    "@inquirer/prompts": "7.5.1",
+    "@testing-library/react": "16.3.0",
+    "@types/bun": "1.2.13",
+    "bun-types": "1.2.13",
+    "chalk": "5.4.1",
+    "commander": "13.1.0",
+    "rimraf": "6.0.1",
+    "rxjs": "7.8.2",
+    "type-fest": "4.41.0",
+    "typescript": "5.8.3"
   }
 }

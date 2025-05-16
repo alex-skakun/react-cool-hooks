@@ -1,23 +1,32 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "ES2017",
-    "moduleResolution": "Node",
-    "moduleDetection": "force",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
+    "moduleResolution": "Node",
     "importHelpers": true,
-    "jsx": "react-jsx",
-    "strict": true
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": [
+      "ESNext"
+    ],
+    "skipLibCheck": true
   },
   "exclude": [
-    "node_modules",
-    "**/*.spec.tsx",
-    "**/*.spec.ts"
+    "node_modules"
   ],
-  "include": [
-    "src"
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfig.tools.json"
+    }
   ]
 }

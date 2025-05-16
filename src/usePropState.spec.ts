@@ -1,4 +1,6 @@
-import { act, renderHook, RenderHookOptions } from '@testing-library/react';
+import { describe, test, expect, beforeEach, mock } from 'bun:test';
+import { act } from 'react';
+import { renderHook, RenderHookOptions } from '@testing-library/react';
 import { usePropState } from './usePropState';
 
 
@@ -20,7 +22,7 @@ describe('usePropState()', () => {
     hookOption = { initialProps: initialProps };
   });
 
-  it('should return same state if prop is unchanged', () => {
+  test('should return same state if prop is unchanged', () => {
     const { result, rerender } = renderHook(({ run = 1 }) => {
       const [state] = usePropState(run);
 
@@ -34,7 +36,7 @@ describe('usePropState()', () => {
     expect(firstState).toBe(secondState);
   });
 
-  it('should return same setState function', () => {
+  test('should return same setState function', () => {
     const { result, rerender } = renderHook(({ run = 1 }) => {
       const [, setState] = usePropState(run);
 
@@ -48,7 +50,7 @@ describe('usePropState()', () => {
     expect(firstSetState).toBe(secondSetState);
   });
 
-  it('should return new state if prop changed', () => {
+  test('should return new state if prop changed', () => {
     const { result, rerender } = renderHook(({ run = 1 }) => {
       const [state] = usePropState(run);
 
@@ -60,8 +62,8 @@ describe('usePropState()', () => {
     expect(result.current).toBe(2);
   });
 
-  it('should return same state if prop is unchanged using factory', () => {
-    const factory = jest.fn((prop) => ({ prop: prop }));
+  test('should return same state if prop is unchanged using factory', () => {
+    const factory = mock((prop) => ({ prop: prop }));
     const { result, rerender } = renderHook(({ run = 1 }) => {
       const [state] = usePropState(run, factory);
 
@@ -75,8 +77,8 @@ describe('usePropState()', () => {
     expect(firstState).toBe(secondState);
   });
 
-  it('should return new state if prop changed using factory', () => {
-    const factory = jest.fn((prop) => ({ prop: prop }));
+  test('should return new state if prop changed using factory', () => {
+    const factory = mock((prop) => ({ prop: prop }));
     const { result, rerender } = renderHook(({ run = 1 }) => {
       const [state] = usePropState(run, factory);
 
@@ -92,8 +94,8 @@ describe('usePropState()', () => {
     expect(factory).toHaveBeenCalledWith(2);
   });
 
-  it('should not invoke factory for unchanged prop', () => {
-    const factory = jest.fn((prop) => ({ prop: prop }));
+  test('should not invoke factory for unchanged prop', () => {
+    const factory = mock((prop) => ({ prop: prop }));
     const { rerender } = renderHook(({ run = 1 }) => {
       const [state] = usePropState(run, factory);
 
@@ -107,8 +109,8 @@ describe('usePropState()', () => {
     expect(factory).toHaveBeenCalledTimes(1);
   });
 
-  it('should provide updated state after internal change using new state object', () => {
-    const factory = jest.fn((prop) => ({ prop: prop }));
+  test('should provide updated state after internal change using new state object', () => {
+    const factory = mock((prop) => ({ prop: prop }));
     const { result } = renderHook(({ run = 1 }) => {
       const [state, setState] = usePropState(run, factory);
 
@@ -124,8 +126,8 @@ describe('usePropState()', () => {
     expect(result.current.state).toEqual({ prop: 2 });
   });
 
-  it('should provide updated state after internal change using state update function', () => {
-    const factory = jest.fn((prop: number): TestState => ({ prop: prop }));
+  test('should provide updated state after internal change using state update function', () => {
+    const factory = mock((prop: number): TestState => ({ prop: prop }));
     const { result } = renderHook(({ run = 1 }) => {
       const [state, setState] = usePropState<TestState, number>(run, factory);
 
@@ -141,7 +143,7 @@ describe('usePropState()', () => {
     expect(result.current.state).toEqual({ prop: 2 });
   });
 
-  it('should receive correct previous state when passing a callback into setState', () => {
+  test('should receive correct previous state when passing a callback into setState', () => {
     const { result } = renderHook(() => {
       const [, setState] = usePropState(null, () => {
         return { stateVersion: 1 };

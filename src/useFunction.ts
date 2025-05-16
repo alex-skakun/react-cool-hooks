@@ -7,9 +7,10 @@ interface MemoizedFunction<T extends (...args: any[]) => any> extends CallableFu
 }
 
 /**
- * This hook provides stable function that invokes passed callback.
- * It doesn't require dependencies, because callback is always up-to-date.
- * Use it as alternative for `useCallback()`.
+ * @summary
+ * This hook provides a stable function that invokes passed callback.
+ * It doesn't require dependencies because callback is always up to date.
+ * Use it as an alternative for `useCallback()`.
  */
 export function useFunction<T extends (...args: any[]) => any>(fn: T): MemoizedFunction<T> {
   const fnRef = useRef<T>(fn);

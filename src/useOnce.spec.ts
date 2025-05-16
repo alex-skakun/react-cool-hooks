@@ -1,10 +1,11 @@
+import { describe, test, expect } from 'bun:test';
 import { renderHook } from '@testing-library/react';
 import { useOnce } from './useOnce';
 
 
 describe('useOnce()', () => {
 
-  it('should return stable result for each render', () => {
+  test('should return stable result for each render', () => {
     const { result, rerender } = renderHook(() => {
       return useOnce(() => Symbol('test'));
     });

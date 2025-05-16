@@ -21,7 +21,7 @@ interface MutablePropState<S> {
 }
 
 /**
- * May be as alternative for `useState()` when you need update your state by passing updated value.
+ * Maybe as an alternative for `useState()` when you need update your state by passing updated value.
  * For a case when you need to create some heavy calculations for state initialization,
  * you may pass stateFactory as second argument.
  */
