@@ -5,6 +5,10 @@ export interface SetToggleState extends CallableFunction {
   (newState?: boolean): void;
 }
 
+/**
+ * @summary
+ * Hook for boolean state. Provides an easy way to toggle and control boolean state.
+ */
 export function useToggleState(initial: boolean = false): [boolean, SetToggleState] {
   const [state, setState] = useState(initial);
 

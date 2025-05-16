@@ -90,6 +90,24 @@ export function MyComponent({ someProp }) {
 }
 ```
 
+## `useToggleState()`
+
+An easy way to control boolean state. Hook allows to toggle boolean value or strictly assigns passed value. 
+
+```typescript jsx
+import { useToggleState } from 'react-cool-hooks';
+
+export function MyComponent({ someProp }) {
+  const [state, toggleState] = useToggleState(false);
+  
+  return <Checkbox checked={state} onChange={() => toggleState()}/>;
+}
+```
+
+## `useMountEffect()` and `useUnmountEffect()`
+
+Shorthands for basic `useEffect()` usages for component lifecycle. 
+
 ## License
 
 MIT
